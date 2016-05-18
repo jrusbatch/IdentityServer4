@@ -5,8 +5,8 @@ using IdentityServer4.Core;
 using IdentityServer4.Core.Extensions;
 using IdentityServer4.Core.Models;
 using IdentityServer4.Core.Services.InMemory;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using System.Collections.Generic;
@@ -46,10 +46,11 @@ namespace IdentityServer4.Tests.Common
             if (CookieAuthenticationScheme != null)
             {
                 this.Options.AuthenticationOptions.PrimaryAuthenticationScheme = CookieAuthenticationScheme;
-                app.UseCookieAuthentication(options =>
-                {
-                    options.AuthenticationScheme = CookieAuthenticationScheme;
-                });
+                app.UseCookieAuthentication(
+                    new CookieAuthenticationOptions
+                    {
+                        AuthenticationScheme = CookieAuthenticationScheme
+                    });
             }
         }
 

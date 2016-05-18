@@ -1,7 +1,7 @@
-﻿using Host.Configuration;
+using Host.Configuration;
 using Host.Extensions;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
@@ -12,16 +12,16 @@ namespace Host
 {
     public class Startup
     {
-        private readonly IApplicationEnvironment _environment;
+        private readonly IHostingEnvironment _environment;
 
-        public Startup(IApplicationEnvironment environment)
+        public Startup(IHostingEnvironment environment)
         {
             _environment = environment;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var cert = new X509Certificate2(Path.Combine(_environment.ApplicationBasePath, "idsrv3test.pfx"), "idsrv3test");
+            var cert = new X509Certificate2(Path.Combine(_environment.ContentRootPath, "idsrv3test.pfx"), "idsrv3test");
 
             var builder = services.AddIdentityServer(options =>
             {
@@ -47,18 +47,15 @@ namespace Host
 
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(LogLevel.Verbose);
-            loggerFactory.AddDebug(LogLevel.Verbose);
+            loggerFactory.AddConsole(LogLevel.Trace);
+            loggerFactory.AddDebug(LogLevel.Trace);
 
             app.UseDeveloperExceptionPage();
-            app.UseIISPlatformHandler();
 
             app.UseIdentityServer();
 
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }
-
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }

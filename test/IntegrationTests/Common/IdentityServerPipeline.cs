@@ -1,12 +1,12 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 using IdentityServer4.Core.Configuration;
 using IdentityServer4.Core.Models;
 using IdentityServer4.Core.Services.InMemory;
 using IdentityServer4.Tests.Common;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.TestHost;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using System;
@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 
 namespace IdentityServer4.Tests.Common
 {
@@ -45,7 +46,7 @@ namespace IdentityServer4.Tests.Common
         public BrowserClient BrowserClient { get; set; }
         public HttpClient Client { get; set; }
 
-        public IdentityServerPipeline(IApplicationEnvironment environment)
+        public IdentityServerPipeline(ApplicationEnvironment environment)
         {
             Options.SigningCertificate = environment.LoadSigningCert();
         }
@@ -80,7 +81,7 @@ namespace IdentityServer4.Tests.Common
 
         public event Action<IApplicationBuilder> OnPreConfigure = x => { };
         public event Action<IApplicationBuilder> OnPostConfigure = x => { };
-         
+
         public void Configure(IApplicationBuilder app)
         {
             OnPreConfigure(app);

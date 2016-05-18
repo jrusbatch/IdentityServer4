@@ -1,4 +1,4 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 using IdentityModel;
@@ -13,10 +13,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Tokens;
 
 #if DOTNET5_4
 using System.IdentityModel.Tokens.Jwt;
@@ -52,7 +54,7 @@ namespace IdentityServer4.Core.Validation
         
         public virtual async Task<TokenValidationResult> ValidateIdentityTokenAsync(string token, string clientId = null, bool validateLifetime = true)
         {
-            _logger.LogVerbose("Start identity token validation");
+            _logger.LogTrace("Start identity token validation");
 
             if (token.Length > _options.InputLengthRestrictions.Jwt)
             {
@@ -112,7 +114,7 @@ namespace IdentityServer4.Core.Validation
 
         public virtual async Task<TokenValidationResult> ValidateAccessTokenAsync(string token, string expectedScope = null)
         {
-            _logger.LogVerbose("Start access token validation");
+            _logger.LogTrace("Start access token validation");
 
             _log.ExpectedScope = expectedScope;
             _log.ValidateLifetime = true;

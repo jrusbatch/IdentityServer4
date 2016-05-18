@@ -1,4 +1,4 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 using IdentityServer4.Core.Configuration;
@@ -9,7 +9,8 @@ using IdentityServer4.Core.Validation;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using IdentityServer4.Core.Hosting;
-using Microsoft.AspNet.Http.Internal;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using UnitTests.Common;
 
 namespace IdentityServer4.Tests.Validation
@@ -71,7 +72,7 @@ namespace IdentityServer4.Tests.Validation
             {
                 aggregateCustomValidator = new CustomGrantValidator(customGrantValidators, new Logger<CustomGrantValidator>(new LoggerFactory()));
             }
-                
+
             if (refreshTokens == null)
             {
                 refreshTokens = new InMemoryRefreshTokenStore();
@@ -83,14 +84,14 @@ namespace IdentityServer4.Tests.Validation
             }
 
             return new TokenRequestValidator(
-                options, 
-                authorizationCodeStore, 
-                refreshTokens, 
-                resourceOwnerValidator, 
+                options,
+                authorizationCodeStore,
+                refreshTokens,
+                resourceOwnerValidator,
                 profile,
-                aggregateCustomValidator, 
-                customRequestValidator, 
-                scopeValidator, 
+                aggregateCustomValidator,
+                customRequestValidator,
+                scopeValidator,
                 new DefaultEventService(new LoggerFactory()),
                 new LoggerFactory());
         }
@@ -143,10 +144,10 @@ namespace IdentityServer4.Tests.Validation
             var sessionCookie = new SessionCookie(IdentityServerContextHelper.Create(null, options));
 
             return new AuthorizeRequestValidator(
-                options, 
-                clients, 
-                customValidator, 
-                uriValidator, 
+                options,
+                clients,
+                customValidator,
+                uriValidator,
                 scopeValidator,
                 sessionCookie,
                 new Logger<AuthorizeRequestValidator>(new LoggerFactory())

@@ -95,7 +95,7 @@ namespace UnitTests.Endpoints.Authorize
         public async Task ProcessAsync_invalid_path_should_return_404()
         {
             _context.HttpContext.Request.Method = "GET";
-            _context.HttpContext.Request.Path = new Microsoft.AspNet.Http.PathString("/foo");
+            _context.HttpContext.Request.Path = new Microsoft.AspNetCore.Http.PathString("/foo");
 
             var result = await _subject.ProcessAsync(_context);
 
@@ -109,7 +109,7 @@ namespace UnitTests.Endpoints.Authorize
         public async Task ProcessAsync_authorize_path_should_return_authorization_result()
         {
             _context.HttpContext.Request.Method = "GET";
-            _context.HttpContext.Request.Path = new Microsoft.AspNet.Http.PathString("/connect/authorize");
+            _context.HttpContext.Request.Path = new Microsoft.AspNetCore.Http.PathString("/connect/authorize");
             _context.HttpContext.SetUser(_user);
 
             var result = await _subject.ProcessAsync(_context);
@@ -122,7 +122,7 @@ namespace UnitTests.Endpoints.Authorize
         public async Task ProcessAsync_authorize_with_login_path_without_login_params_should_return_error_page()
         {
             _context.HttpContext.Request.Method = "GET";
-            _context.HttpContext.Request.Path = new Microsoft.AspNet.Http.PathString("/connect/authorize/login");
+            _context.HttpContext.Request.Path = new Microsoft.AspNetCore.Http.PathString("/connect/authorize/login");
             _context.HttpContext.SetUser(_user);
 
             var result = await _subject.ProcessAsync(_context);
@@ -138,7 +138,7 @@ namespace UnitTests.Endpoints.Authorize
             _mockSignInResponseStore.Messages.Add("123", new Message<SignInResponse>(new SignInResponse()) { AuthorizeRequestParameters = new Dictionary<string, string>() });
             _context.HttpContext.Request.QueryString = _context.HttpContext.Request.QueryString.Add("id", "123");
             _context.HttpContext.SetUser(_user);
-            _context.HttpContext.Request.Path = new Microsoft.AspNet.Http.PathString("/connect/authorize/login");
+            _context.HttpContext.Request.Path = new Microsoft.AspNetCore.Http.PathString("/connect/authorize/login");
 
             var result = await _subject.ProcessAsync(_context);
 
@@ -150,7 +150,7 @@ namespace UnitTests.Endpoints.Authorize
         public async Task ProcessAsync_authorize_with_consent_path_without_consent_params_should_return_error_page()
         {
             _context.HttpContext.Request.Method = "GET";
-            _context.HttpContext.Request.Path = new Microsoft.AspNet.Http.PathString("/connect/authorize/consent");
+            _context.HttpContext.Request.Path = new Microsoft.AspNetCore.Http.PathString("/connect/authorize/consent");
             _context.HttpContext.SetUser(_user);
 
             var result = await _subject.ProcessAsync(_context);
@@ -166,7 +166,7 @@ namespace UnitTests.Endpoints.Authorize
             _mockUserConsentResponseMessageStore.Messages.Add("123", new Message<ConsentResponse>(new ConsentResponse()) { AuthorizeRequestParameters = new Dictionary<string, string>() });
             _context.HttpContext.Request.QueryString = _context.HttpContext.Request.QueryString.Add("id", "123");
             _context.HttpContext.SetUser(_user);
-            _context.HttpContext.Request.Path = new Microsoft.AspNet.Http.PathString("/connect/authorize/consent");
+            _context.HttpContext.Request.Path = new Microsoft.AspNetCore.Http.PathString("/connect/authorize/consent");
 
             var result = await _subject.ProcessAsync(_context);
 

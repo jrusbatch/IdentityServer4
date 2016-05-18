@@ -1,4 +1,4 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 using FluentAssertions;
@@ -7,8 +7,8 @@ using IdentityServer4.Core.Configuration;
 using IdentityServer4.Core.Validation;
 using System;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 using Xunit;
-using Microsoft.AspNet.Http.Internal;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Extensions.Logging;
 
@@ -61,7 +61,7 @@ namespace IdentityServer4.Tests.Validation.Secrets
             var context = new DefaultHttpContext();
 
             context.Request.Headers.Add("Authorization", new StringValues(""));
-                
+
             var secret = await _parser.ParseAsync(context);
 
             secret.Should().BeNull();

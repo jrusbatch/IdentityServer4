@@ -1,14 +1,15 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 using FluentAssertions;
 using IdentityServer4.Core;
 using IdentityServer4.Core.Configuration;
 using IdentityServer4.Core.Validation;
-using Microsoft.AspNet.Http.Internal;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.Logging;
 using System.IO;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 using Xunit;
 
 namespace IdentityServer4.Tests.Validation.Secrets

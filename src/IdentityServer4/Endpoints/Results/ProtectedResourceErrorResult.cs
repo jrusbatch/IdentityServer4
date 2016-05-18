@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using IdentityServer4.Core.Extensions;
 using Microsoft.Extensions.Primitives;
 using IdentityServer4.Core.Hosting;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 
 namespace IdentityServer4.Core.Endpoints.Results
 {

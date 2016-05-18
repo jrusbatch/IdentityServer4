@@ -3,7 +3,7 @@
 
 using System;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 using IdentityServer4.Core.Validation;
 using IdentityServer4.Core.ResponseHandling;
 using IdentityServer4.Core.Services;

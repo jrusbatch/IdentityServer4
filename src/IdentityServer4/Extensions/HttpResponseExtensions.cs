@@ -4,7 +4,7 @@
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 
-namespace Microsoft.AspNet.Http
+namespace Microsoft.AspNetCore.Http
 {
     public static class HttpResponseExtensions
     {

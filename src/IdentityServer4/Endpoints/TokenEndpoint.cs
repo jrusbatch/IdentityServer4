@@ -6,7 +6,7 @@ using IdentityServer4.Core.Endpoints.Results;
 using IdentityServer4.Core.Hosting;
 using IdentityServer4.Core.ResponseHandling;
 using IdentityServer4.Core.Validation;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
@@ -29,7 +29,7 @@ namespace IdentityServer4.Core.Endpoints
 
         public async Task<IEndpointResult> ProcessAsync(IdentityServerContext context)
         {
-            _logger.LogVerbose("Start token request.");
+            _logger.LogTrace("Start token request.");
 
             // validate HTTP
             if (context.HttpContext.Request.Method != "POST" || !context.HttpContext.Request.HasFormContentType)

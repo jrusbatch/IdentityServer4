@@ -1,9 +1,9 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 using IdentityServer4.Core.Extensions;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
 namespace IdentityServer4.Core.Hosting
@@ -11,7 +11,7 @@ namespace IdentityServer4.Core.Hosting
     public class BaseUrlMiddleware
     {
         private readonly RequestDelegate _next;
-        
+
         public BaseUrlMiddleware(RequestDelegate next)
         {
             _next = next;

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 using Microsoft.Extensions.Logging;
@@ -15,9 +15,8 @@ namespace UnitTests.Common
             }
         }
 
-        public IDisposable BeginScopeImpl(object state)
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
-            return new FakeDisposable();
         }
 
         public bool IsEnabled(LogLevel logLevel)
@@ -25,8 +24,9 @@ namespace UnitTests.Common
             return true;
         }
 
-        public void Log(LogLevel logLevel, int eventId, object state, Exception exception, Func<object, Exception, string> formatter)
+        public IDisposable BeginScope<TState>(TState state)
         {
+            return new FakeDisposable();
         }
     }
 
@@ -39,7 +39,7 @@ namespace UnitTests.Common
             }
         }
 
-        public IDisposable BeginScopeImpl(object state)
+        public IDisposable BeginScope<TState>(TState state)
         {
             return new FakeDisposable();
         }
@@ -49,7 +49,7 @@ namespace UnitTests.Common
             return true;
         }
 
-        public void Log(LogLevel logLevel, int eventId, object state, Exception exception, Func<object, Exception, string> formatter)
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
         }
     }

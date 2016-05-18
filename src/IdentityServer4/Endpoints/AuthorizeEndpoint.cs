@@ -1,10 +1,10 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer4.Core.Extensions;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 using IdentityServer4.Core.Validation;
 using IdentityServer4.Core.ResponseHandling;
 using IdentityServer4.Core.Services;
@@ -167,11 +167,11 @@ namespace IdentityServer4.Core.Endpoints
         {
             if (user != null)
             {
-                _logger.LogVerbose("User in authorize request: name:{0}, sub:{1}", user.GetName(), user.GetSubjectId());
+                _logger.LogTrace("User in authorize request: name:{0}, sub:{1}", user.GetName(), user.GetSubjectId());
             }
             else
             {
-                _logger.LogVerbose("No user present in authorize request");
+                _logger.LogTrace("No user present in authorize request");
             }
 
             // validate request

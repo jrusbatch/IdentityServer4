@@ -1,7 +1,7 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-using Microsoft.AspNet.TestHost;
+using Microsoft.AspNetCore.TestHost;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -10,6 +10,7 @@ using FluentAssertions;
 using System.Net;
 using IdentityModel.Client;
 using System.Linq;
+using Microsoft.AspNetCore.Hosting;
 
 namespace IdentityServer4.Tests.Endpoints.Introspection
 {
@@ -24,7 +25,7 @@ namespace IdentityServer4.Tests.Endpoints.Introspection
 
         public IntrospectionTests()
         {
-            var server = new TestServer(TestServer.CreateBuilder()
+            var server = new TestServer(new WebHostBuilder().UseStartup<Startup>()
                                 .UseStartup<Startup>());
 
             _handler = server.CreateHandler();

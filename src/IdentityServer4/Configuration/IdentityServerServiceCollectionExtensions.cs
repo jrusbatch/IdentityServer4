@@ -1,4 +1,4 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 using IdentityServer4.Core;
@@ -12,7 +12,7 @@ using IdentityServer4.Core.Services;
 using IdentityServer4.Core.Services.Default;
 using IdentityServer4.Core.Services.InMemory;
 using IdentityServer4.Core.Validation;
-using Microsoft.AspNet.Cors.Infrastructure;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using System;
@@ -36,7 +36,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static IIdentityServerBuilder AddIdentityServer(this IServiceCollection services, IdentityServerOptions options)
         {
-            services.AddInstance(options);
+            services.AddSingleton(options);
 
             services.AddAuthentication();
 
@@ -81,7 +81,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 map.Add(Constants.RoutePaths.Oidc.Authorize, typeof(AuthorizeEndpoint));
             }
 
-            services.AddInstance<IEndpointRouter>(new EndpointRouter(map));
+            services.AddSingleton<IEndpointRouter>(new EndpointRouter(map));
             foreach (var item in map)
             {
                 services.AddTransient(item.Value);
@@ -110,7 +110,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddTransient<IIntrospectionRequestValidator, IntrospectionRequestValidator>();
 
             // todo services.TryAddTransient<IResourceOwnerPasswordValidator, DefaultResouceOwnerPasswordValidator>();
-            
+
             return services;
         }
 
@@ -131,7 +131,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<SecretParser>();
             services.AddTransient<ISecretParser, BasicAuthenticationSecretParser>();
             services.AddTransient<ISecretParser, PostBodySecretParser>();
-            
+
             return services;
         }
 

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 using IdentityServer4.Core.Extensions;
@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 using System.Linq;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using IdentityModel;
+using Microsoft.IdentityModel.Tokens;
 
 #if DOTNET5_4
 using System.IdentityModel.Tokens.Jwt;
@@ -63,9 +65,9 @@ namespace IdentityServer4.Core.Services.Default
         /// Creates the JWT header
         /// </summary>
         /// <param name="token">The token.</param>
-        /// <param name="credential">The credentials.</param>
+        /// <param name="key">The key.</param>
         /// <returns>The JWT header</returns>
-        protected virtual async Task<JwtHeader> CreateHeaderAsync(Token token, SecurityKey key)
+        protected virtual Task<JwtHeader> CreateHeaderAsync(Token token, SecurityKey key)
         {
             JwtHeader header = null;
 
@@ -82,7 +84,7 @@ namespace IdentityServer4.Core.Services.Default
             }
 #endif
 
-            return header;
+            return Task.FromResult(header);
         }
 
         /// <summary>
@@ -113,7 +115,7 @@ namespace IdentityServer4.Core.Services.Default
             }
 
             // deal with json types
-            // calling ToArray() to trigger JSON parsing once and so later 
+            // calling ToArray() to trigger JSON parsing once and so later
             // collection identity comparisons work for the anonymous type
             var jsonTokens = jsonClaims.Select(x => new { x.Type, JsonValue = JRaw.Parse(x.Value) }).ToArray();
 

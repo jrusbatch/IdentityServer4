@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 using IdentityServer4.Core.Hosting;
 
 namespace IdentityServer4.Core.Endpoints.Results

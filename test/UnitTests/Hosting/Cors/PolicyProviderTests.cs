@@ -1,10 +1,11 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using IdentityServer4.Core.Hosting.Cors;
-using Microsoft.AspNet.Http.Internal;
+using Microsoft.AspNetCore.Http.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using UnitTests.Common;
 using Xunit;
 
@@ -52,8 +53,8 @@ namespace UnitTests.Hosting.Cors
 
             var ctx = new DefaultHttpContext();
             ctx.Request.Scheme = "https";
-            ctx.Request.Host = new Microsoft.AspNet.Http.HostString("server");
-            ctx.Request.Path = new Microsoft.AspNet.Http.PathString(path);
+            ctx.Request.Host = new HostString("server");
+            ctx.Request.Path = new PathString(path);
             ctx.Request.Headers.Add("Origin", "http://notserver");
 
             var response = await _subject.GetPolicyAsync(ctx, null);
@@ -78,8 +79,8 @@ namespace UnitTests.Hosting.Cors
 
             var ctx = new DefaultHttpContext();
             ctx.Request.Scheme = "https";
-            ctx.Request.Host = new Microsoft.AspNet.Http.HostString("server");
-            ctx.Request.Path = new Microsoft.AspNet.Http.PathString(path);
+            ctx.Request.Host = new HostString("server");
+            ctx.Request.Path = new PathString(path);
             ctx.Request.Headers.Add("Origin", "http://notserver");
 
             var response = await _subject.GetPolicyAsync(ctx, null);
@@ -98,8 +99,8 @@ namespace UnitTests.Hosting.Cors
 
             var ctx = new DefaultHttpContext();
             ctx.Request.Scheme = "https";
-            ctx.Request.Host = new Microsoft.AspNet.Http.HostString("server");
-            ctx.Request.Path = new Microsoft.AspNet.Http.PathString("/foo");
+            ctx.Request.Host = new HostString("server");
+            ctx.Request.Path = new PathString("/foo");
             ctx.Request.Headers.Add("Origin", "https://server");
 
             var response = await _subject.GetPolicyAsync(ctx, null);
@@ -120,8 +121,8 @@ namespace UnitTests.Hosting.Cors
 
             var ctx = new DefaultHttpContext();
             ctx.Request.Scheme = "https";
-            ctx.Request.Host = new Microsoft.AspNet.Http.HostString("server");
-            ctx.Request.Path = new Microsoft.AspNet.Http.PathString("/foo");
+            ctx.Request.Host = new HostString("server");
+            ctx.Request.Path = new PathString("/foo");
             ctx.Request.Headers.Add("Origin", origin);
 
             var response = await _subject.GetPolicyAsync(ctx, null);

@@ -1,9 +1,9 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 using IdentityServer4.Core.Configuration;
 using IdentityServer4.Core.Extensions;
-using Microsoft.AspNet.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace IdentityServer4.Core.Hosting
@@ -16,11 +16,12 @@ namespace IdentityServer4.Core.Hosting
             if (idSvrOptions.Endpoints.EnableAuthorizeEndpoint &&
                 idSvrOptions.AuthenticationOptions.PrimaryAuthenticationScheme.IsMissing())
             {
-                app.UseCookieAuthentication(options =>
-                {
-                    options.AuthenticationScheme = idSvrOptions.AuthenticationOptions.EffectivePrimaryAuthenticationScheme;
-                    options.AutomaticAuthenticate = true;
-                });
+                app.UseCookieAuthentication(
+                    new CookieAuthenticationOptions
+                    {
+                        AutomaticAuthenticate = true,
+                        AuthenticationScheme = idSvrOptions.AuthenticationOptions.EffectivePrimaryAuthenticationScheme
+                    });
             }
         }
     }

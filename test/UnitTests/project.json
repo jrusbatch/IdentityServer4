@@ -1,27 +1,33 @@
 {
-  "compilationOptions": {
+  "buildOptions": {
     "warningsAsErrors": true
   },
+  "testRunner": "xunit",
   "dependencies": {
-    "IdentityServer4": "",
+    "IdentityServer4": {
+      "version": "1.0.0-rc2-alpha1",
+      "target": "project"
+    },
     "xunit": "2.1.0",
-    "xunit.runner.dnx": "2.1.0-rc1-build204",
-    "Microsoft.AspNet.Http": "1.0.0-rc1-final",
-    "FluentAssertions": "4.2.2"
-  },
-  "commands": {
-    "test": "xunit.runner.dnx"
+    "dotnet-test-xunit": "1.0.0-rc2-build10015",
+    "Microsoft.AspNetCore.Http": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Logging": "1.0.0-rc2-final",
+    "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc2-final",
+    "FluentAssertions": "4.6.1",
+    "System.IdentityModel.Tokens.Jwt": "5.0.0-rc2-305061149"
   },
   "frameworks": {
-    "dnx451": {
+    "netcoreapp1.0": {
       "dependencies": {
-        "System.IdentityModel.Tokens.Jwt": "4.0.2.202250711"
-      }
-    },
-    "dnxcore50": {
-      "dependencies": {
-        "System.IdentityModel.Tokens.Jwt": "5.0.0-rc1-211161024"
-      }
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.0.0-rc2-3002702"
+        }
+      },
+      "imports": [
+        "dnxcore50",
+        "portable-net45+win8"
+      ]
     }
   }
 }
